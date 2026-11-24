@@ -18,7 +18,7 @@ function loop(now){
   const p = W.P(1.5, 3.25, 11); if (p[2] > .5) { sign.style.left = p[0] + "px"; sign.style.top = p[1] + "px"; sign.style.opacity = H.intro ? 0 : 1; }
   const s = H.shift(), sec = Math.floor(Date.now() / 1000);
   if (sec !== lastSec) { lastSec = sec; signL.textContent = "shift #" + s.n + " · " + s.name + " · payroll in"; signD.textContent = H.left(s.end - Date.now());
-    $("#clock").innerHTML = '<i class="dot"></i><span class="nm">' + s.name + ' shift ·</span> <b>' + H.left(s.end - Date.now()) + "</b>"; $("#utc").textContent = new Date().toISOString().slice(11, 19);
+    $("#clock").innerHTML = '<i class="dot"></i><span class="nm">' + s.name + ' shift ·</span> <b>' + H.left(s.end - Date.now()) + "</b>"; $("#utc").textContent = new Date().toISOString().slice(11, 19); $("#s-next").textContent = H.shift(s.end + 1).name + " at " + H.utc(s.end);
     if (s.n !== curShift) { curShift = s.n; H.tick(); H.toast("shift #" + (s.n - 1) + " is over. payroll is open."); H.load(); } }
   // the tag follows whatever desk is under the pointer (or the selected one)
   const pk = mx >= 0 ? W.pick(mx, my) : null; hoverDesk = pk ? pk.d : null; W.hover = hoverDesk; cv.classList.toggle("pt", !!pk);
@@ -140,7 +140,7 @@ function intro(){
   setTimeout(() => { if (H.intro) $(".intro").classList.add("show"); }, 5600);
   const auto = setTimeout(() => { if (H.intro) enter(); }, 12000);
   $(".intro .skip").onclick = () => { clearTimeout(auto); enter(); };
-  $(".intro .go").onclick = () => { clearTimeout(auto); H.audio(); enter(); };
+  $(".intro .go").onclick = () => { clearTimeout(auto); H.audio(); H.strike(); enter(); setTimeout(() => H.toast("clocked in · " + new Date().toISOString().slice(11, 16) + " utc · " + H.shift().name + " shift"), 700); };
   addEventListener("pointerdown", function once(){ removeEventListener("pointerdown", once); if (H.sound.on) { H.audio(); $(".intro .tap") && ($(".intro .tap").textContent = "sound on"); } }, { once: true });
   addEventListener("keydown", function k(e){ if (!H.intro) return removeEventListener("keydown", k); if (e.key === "Enter" || e.key === "Escape" || e.key === " ") { clearTimeout(auto); H.audio(); enter(); } });
 }

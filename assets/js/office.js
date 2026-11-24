@@ -79,12 +79,17 @@ World.prototype.frame = function(now){
       W.screen.push({ d: f.d, x: p[0], y: p[1], r: Math.max(10, r * 2.2), z: p[2] }); continue; }
     c.fillStyle = col(f.rgb, f.z); c.beginPath(); f.pp.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.fill();
     if (f.ex && f.ex.glow > .05) { const m = f.pp.reduce((s, p) => [s[0] + p[0] / 4, s[1] + p[1] / 4], [0, 0]), r = Math.max(w, h * .8) * cam.fov * .9 / f.z; c.globalAlpha = f.ex.glow * .75 * (1 - fk(f.z)); c.drawImage(W.sprite, m[0] - r, m[1] - r, r * 2, r * 2); c.globalAlpha = 1;
+      if (f.ex.glow > .6 && f.z < 12) { const [a, b2, c2, d2] = f.pp, L = (u, v) => [a[0] + (b2[0] - a[0]) * u + (d2[0] - a[0]) * v, a[1] + (b2[1] - a[1]) * u + (d2[1] - a[1]) * v]; let sd = f.ex.d.i * 7 + 3; const rr = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+        c.strokeStyle = "rgba(120,70,20,.55)"; c.lineWidth = Math.max(1, 3 / f.z); c.beginPath(); let v = .25 + rr() * .2; for (let k = 0; k <= 8; k++) { v = Math.max(.15, Math.min(.85, v + (rr() - .45) * .22 + (k === 8 ? Math.sin(t * .7 + f.ex.d.i) * .03 : 0))); const q = L(.1 + k * .1, v); k ? c.lineTo(q[0], q[1]) : c.moveTo(q[0], q[1]); } c.stroke(); }
       if (f.ex.d.state === "on" && !W.screen.some(s => s.d === f.ex.d)) W.screen.push({ d: f.ex.d, x: m[0], y: m[1], r: Math.max(10, Math.max(w, h * .8) * cam.fov * .5 / f.z), z: f.z }); }
     if (f.ex && f.ex.fired) { const m = f.pp.reduce((s, p) => [s[0] + p[0] / 4, s[1] + p[1] / 4], [0, 0]); W.screen.push({ d: f.ex.fired, x: m[0], y: m[1], r: Math.max(10, Math.max(w, h * .8) * cam.fov * .5 / f.z), z: f.z }); }
     if (f.ex && f.ex.led && f.z < 40) { const m = f.pp.reduce((s, p) => [s[0] + p[0] / 4, s[1] + p[1] / 4], [0, 0]), r = Math.max(1.2, Math.max(w, h * .8) * cam.fov * .025 / f.z), on = Math.sin(t * 3 + m[0]) > -.2; if (on) { c.fillStyle = "rgba(255,59,48,.95)"; c.shadowColor = "#ff3b30"; c.shadowBlur = r * 6; c.beginPath(); c.arc(m[0], m[1], r, 0, 7); c.fill(); c.shadowBlur = 0; } }
   }
   // wages falling: warm specks onto desks
   W.drops = W.drops.filter(p => { p.v += .004; p.y -= p.v; const s = W.P(p.x, p.y, p.z); if (s[2] > .3) { c.fillStyle = "rgba(255,214,160," + (.9 * (1 - fk(s[2]))).toFixed(3) + ")"; c.beginPath(); c.arc(s[0], s[1], Math.max(1, Math.max(w, h * .8) * cam.fov * .025 / s[2]), 0, 7); c.fill(); } return p.y > .8; });
+  // dust in the light
+  if (!W.dust) { W.dust = Array.from({ length: 70 }, () => ({ x: (Math.random() - .5) * 12, y: .4 + Math.random() * 2.8, z: Math.random() * 14, s: Math.random() * 6.28 })); }
+  for (const p of W.dust) { p.y += Math.sin(t * .3 + p.s) * .0008; p.x += Math.cos(t * .2 + p.s) * .0006; const q = W.P(p.x + cam.x * 0, p.y, p.z); if (q[2] < .5) continue; const a = .35 * (1 - fk(q[2])) * (.5 + .5 * Math.sin(t + p.s)); c.fillStyle = "rgba(255,240,220," + a.toFixed(3) + ")"; c.beginPath(); c.arc(q[0], q[1], Math.max(.6, 1.6 / q[2] * 3), 0, 7); c.fill(); }
   // vignette
   const vg = c.createRadialGradient(w / 2, h * .5, Math.min(w, h) * .3, w / 2, h * .5, Math.max(w, h) * .75); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.6)"); c.fillStyle = vg; c.fillRect(0, 0, w, h);
 };

@@ -6,7 +6,7 @@ const W = new window.SH1FT_World($("#world"), { rows: LOW ? 6 : 9, scale: LOW ? 
 // an illustration of the rules, not live data: the live office is one click away
 const people = n => Array.from({ length: n }, () => ({}));
 const STATES = {
-  0: { cam: { x: 3.4, y: 2.9, z: -5, pitch: .14, yaw: -.12 }, light: .22, on: 0, fired: 0 },
+  0: { cam: { x: 3.4, y: 2.9, z: -5, pitch: .14, yaw: -.12 }, light: .35, on: 40, fired: 0 },
   1: { cam: { x: 1.3, y: 2.5, z: -3, pitch: .1, yaw: .05 }, light: .55, on: 70, fired: 0 },
   2: { cam: { x: -1.2, y: 2.2, z: 2.5, pitch: -.02, yaw: .12 }, light: .6, on: 70, fired: 0 },
   3: { cam: { x: 1.8, y: 2.0, z: -1.2, pitch: .2, yaw: -.08 }, light: .5, on: 69, fired: 1 },
