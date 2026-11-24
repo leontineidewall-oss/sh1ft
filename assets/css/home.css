@@ -1,0 +1,40 @@
+/* sh1ft · the story: the office stays behind the page, each section is a moment of it */
+body.home #world{position:fixed;z-index:0}
+body.home .bar{background:linear-gradient(rgba(5,5,6,.85),rgba(5,5,6,0))}
+.hn a{padding:6px 11px}
+.hero{min-height:100vh;display:flex;align-items:center;padding:110px 0 80px;background:linear-gradient(90deg,rgba(5,5,6,.92) 0%,rgba(5,5,6,.6) 45%,rgba(5,5,6,0) 70%)}
+.hero .big{font-size:clamp(84px,14vw,200px);display:block;margin:18px 0 0;line-height:.9}
+.hero .lede{font-size:17px;max-width:520px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);max-width:640px;margin-top:44px;border:1px solid var(--edge);border-radius:12px;background:rgba(8,8,10,.7);backdrop-filter:blur(8px)}
+.strip>div{padding:12px 14px;border-right:1px solid var(--edge)}.strip>div:last-child{border-right:0}
+.sec{padding:130px 0;background:rgba(5,5,6,.86);backdrop-filter:blur(2px)}
+.cmp{margin-top:40px;border:1px solid var(--edge);border-radius:14px;padding:8px 10px;background:rgba(10,10,12,.7)}
+.cmp .tbl td,.cmp .tbl th{padding:13px 12px;font-size:13.5px}.cmp .tbl td:first-child{color:var(--fg2)}
+.lvl{min-height:100vh;display:flex;align-items:center;padding:80px 0}
+.lvl .card{max-width:470px;padding:28px;border:1px solid var(--edge2);border-radius:16px;background:rgba(8,8,10,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.5);opacity:.25;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);border-left:2px solid var(--warm)}
+.lvl.r .card{margin-left:auto}.lvl.on .card{opacity:1;transform:none}
+.lvl .hd{font-size:clamp(30px,3.6vw,44px)}.lvl p{color:var(--fg2);font:400 15px/1.7 var(--in);margin:16px 0 0}.lvl p b{color:var(--fg);font-weight:600}
+.eyb.red{border-color:rgba(255,59,48,.4)}.eyb.red b{color:var(--red)}
+.flow{display:flex;align-items:center;gap:8px;margin-top:20px;flex-wrap:wrap}.flow span{padding:6px 10px;border:1px solid var(--edge2);border-radius:8px;font-size:12px}.flow i{width:20px;height:1px;background:repeating-linear-gradient(90deg,var(--warm) 0 3px,transparent 3px 6px)}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--edge);border-radius:10px;margin-top:20px}.mini>div{padding:10px 12px;border-right:1px solid var(--edge)}.mini>div:last-child{border-right:0}
+.calc{display:grid;grid-template-columns:1fr 1fr;margin-top:40px;border:1px solid var(--edge2);border-radius:16px;background:rgba(10,10,12,.82);overflow:hidden}
+.calc .in{padding:26px;border-right:1px solid var(--edge);display:grid;gap:22px}.calc label{display:grid;gap:10px;font-size:12.5px;color:var(--fg2)}.calc label b{float:right;color:var(--fg)}
+.calc input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--warm) var(--p,50%),var(--edge2) var(--p,50%));outline:0}
+.calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--fg);box-shadow:0 0 0 4px rgba(255,210,154,.25);cursor:pointer}
+.calc input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--fg)}
+.calc .out{padding:26px;display:flex;flex-direction:column;gap:10px}.calc .big{font:800 clamp(40px,5vw,64px)/1 var(--ms);letter-spacing:-.04em;color:var(--warm);text-shadow:0 0 40px rgba(255,210,154,.25)}.calc .big small{font:400 14px var(--mo);color:var(--dim);margin-left:8px;letter-spacing:0}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border:1px solid var(--edge);border-radius:16px;overflow:hidden;background:rgba(10,10,12,.7)}
+.nums>div{padding:34px 26px;border-right:1px solid var(--edge)}.nums>div:last-child{border-right:0}
+.nums b{display:block;font:800 clamp(52px,7vw,96px)/.9 var(--ms);letter-spacing:-.05em;background:linear-gradient(180deg,#fff1dc,var(--warm) 50%,#b07a3a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nums span{display:block;margin-top:14px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.pills span{border:1px solid var(--edge2);border-radius:99px;padding:8px 14px;font-size:12px;color:var(--dim)}.pills b{color:var(--warm);font-weight:700;margin-left:6px}
+.addr{display:grid;grid-template-columns:1fr 1fr;margin-top:40px;border:1px solid var(--edge);border-radius:14px;overflow:hidden;background:rgba(10,10,12,.7)}.addr>div{padding:16px 18px;border-bottom:1px solid var(--edge);border-right:1px solid var(--edge)}.addr>div:nth-child(2n){border-right:0}.addr>div:nth-last-child(-n+2){border-bottom:0}
+.addr .v{font-size:14px;margin-top:6px}.addr a{text-decoration:none}.addr a:hover{color:var(--warm)}
+.faqg{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+.faq details{border-bottom:1px solid var(--edge)}.faq summary{list-style:none;cursor:pointer;padding:20px 0;display:flex;justify-content:space-between;gap:16px;font:700 15px var(--mo)}.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--warm);transition:transform .25s}.faq details[open] summary:after{transform:rotate(45deg)}.faq p{margin:0 0 20px;color:var(--fg2);font:400 14.5px/1.7 var(--in)}
+.outro{padding:180px 0;text-align:center;background:radial-gradient(50% 60% at 50% 50%,rgba(255,210,154,.08),rgba(5,5,6,.9) 70%)}.outro .hd{font-size:clamp(52px,9vw,128px)}
+body.home .foot{background:rgba(5,5,6,.95);position:relative;z-index:2;margin:0}
+@media (max-width:900px){.hn{display:none}.calc,.faqg,.addr{grid-template-columns:1fr}.calc .in{border-right:0;border-bottom:1px solid var(--edge)}.addr>div{border-right:0!important}.nums{grid-template-columns:1fr 1fr}.nums>div:nth-child(2){border-right:0}.nums>div:nth-child(-n+2){border-bottom:1px solid var(--edge)}.strip{grid-template-columns:1fr 1fr}.strip>div:nth-child(2){border-right:0}.strip>div:nth-child(-n+2){border-bottom:1px solid var(--edge)}.lvl .card{margin:0 auto!important}}
+@media (max-width:640px){body.home .bar .pa{display:none}.sign{display:none}}
