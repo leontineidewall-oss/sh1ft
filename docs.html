@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SH1FT(7) · the manual</title>
+<meta name="description" content="how sh1ft works: the clock, clocking in, getting fired, payroll, the payroll wallet, the api.">
+<meta name="theme-color" content="#050506">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/sh1ft.css">
+<style>
+.man{max-width:880px;margin:0 auto;padding:110px clamp(18px,4vw,40px) 60px}
+.mh{display:flex;justify-content:space-between;color:var(--dim);font-size:12px;border-bottom:1px solid var(--edge);padding-bottom:10px}
+.man h1{font:800 clamp(56px,9vw,110px)/.9 var(--ms);letter-spacing:-.05em;margin:40px 0 8px}
+.man h2{font-size:12px;letter-spacing:.2em;color:var(--warm);margin:46px 0 12px;font-weight:700}
+.man p,.man li{color:var(--fg2);font-size:13.5px;line-height:1.85}.man b{color:var(--fg)}
+.man pre{background:rgba(255,255,255,.02);border:1px solid var(--edge);border-radius:12px;padding:16px 18px;overflow:auto;font-size:12.5px;line-height:1.6;color:var(--fg2)}
+.man code{color:var(--warm)}
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 18px;margin-top:26px;font-size:12.5px}.toc a{text-decoration:none;color:var(--fg2)}.toc a:hover{color:var(--warm)}
+.man table{width:100%;border-collapse:collapse;font-size:12.5px}.man td{padding:7px 8px;border-bottom:1px solid var(--edge);color:var(--fg2);vertical-align:top}.man td:first-child{color:var(--fg);white-space:nowrap}
+@media (max-width:640px){.toc{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="bar" style="background:linear-gradient(rgba(5,5,6,.95),rgba(5,5,6,0))">
+  <a class="wm" href="/" aria-label="sh1ft">sh<b>1</b>ft</a>
+  <span style="margin-left:auto"></span>
+  <a class="pa" href="/home">story</a><a class="pa warm" href="/">enter the office</a>
+</header>
+<main class="man">
+  <div class="mh"><span>SH1FT(7)</span><span>the manual</span><span>SH1FT(7)</span></div>
+  <h1>sh<span class="warm">1</span>ft</h1>
+  <p>an office that never closes. hold through a whole shift, get paid.</p>
+  <div class="toc"><a href="#name">01 name</a><a href="#clock">02 the clock</a><a href="#in">03 clocking in</a><a href="#fired">04 fired</a><a href="#payroll">05 payroll</a><a href="#wallet">06 the payroll wallet</a><a href="#proto">07 a shift, end to end</a><a href="#api">08 public api</a><a href="#limits">09 honest limits</a></div>
+
+  <h2 id="name">01 · NAME</h2>
+  <p><b>sh1ft</b> — a pump.fun coin, <b>$SH1FT</b>, whose creator fees are paid out as wages. every 8 hours the holders who held through the whole shift are paid in SOL, split by the bag they clocked in with. anyone who sells during the shift is fired for that shift.</p>
+
+  <h2 id="clock">02 · THE CLOCK</h2>
+  <p>a shift is 8 hours, counted in utc from the unix epoch: shift <code>n</code> runs from <code>n × 28,800,000</code> ms to <code>(n + 1) × 28,800,000</code> ms. three a day:</p>
+  <table><tr><td>00:00 – 08:00</td><td>graveyard</td></tr><tr><td>08:00 – 16:00</td><td>day</td></tr><tr><td>16:00 – 24:00</td><td>swing</td></tr></table>
+
+  <h2 id="in">03 · CLOCKING IN</h2>
+  <p>you're on shift if, <b>when the shift started</b>, your wallet held at least <b>$50</b> of $SH1FT (priced at the coin's live price when the roster is read). the office has <b>100 desks</b>: the top 100 holders who clocked in, by bag. buying more during a shift is fine; your wage uses your bag at clock-in. pools, program accounts, the bonding curve and the payroll wallet never get a desk.</p>
+
+  <h2 id="fired">04 · FIRED</h2>
+  <p>if your $SH1FT balance goes down at any point during the shift (a sell, or a send to another wallet), you're <b>fired</b> for that shift: no wage, and your share goes to everyone who stayed. you clock back in automatically at the next shift if you hold from its start.</p>
+
+  <h2 id="payroll">05 · PAYROLL</h2>
+  <p>after a shift ends, payroll pays the last closed shift once:</p>
+  <pre>payable = payroll wallet balance − 0.002 SOL (rent) − network fees
+wage    = payable × your bag at clock-in ÷ everyone's bag at clock-in</pre>
+  <p>wages under <b>0.001 SOL</b> drop and their share goes back to the rest. there's no payroll under <b>0.01 SOL</b>; the fees roll into the next shift. anyone can run payroll (the office has a button, the terminal has <code>run</code>), and it also runs by itself once a day. each payout transaction carries the note <code>sh1ft:1:pay:&lt;shift&gt;:&lt;i&gt;/&lt;n&gt;</code>, and a shift with a note on chain is never paid twice. you must still be holding when payroll runs.</p>
+
+  <h2 id="wallet">06 · THE PAYROLL WALLET</h2>
+  <p>one public Solana wallet. pump.fun's creator fee sharing sends $SH1FT's fees to it. its key is derived on sh1ft's server from one secret and never leaves it. the code sends from it in one way only: wages to the last shift's roster. sh1ft takes <b>0</b>.</p>
+
+  <h2 id="proto">07 · A SHIFT, END TO END</h2>
+<pre>  YOU                 SOLANA                  SH1FT                PAYROLL WALLET
+   |  hold at 08:00     |                        |                       |
+   |------------------->|                        |                       |
+   |                    |  trades pay fees  ------------------------->   |
+   |      (8 hours: don't sell)                  |                       |
+   |                    |   16:00: shift ends    |                       |
+   |                    |<-- read every top     -|                       |
+   |                    |    holder's history    |                       |
+   |                    |--- roster: held all  ->|                       |
+   |                    |    shift, never sold   |                       |
+   |                    |                        |-- pay by bag  ------->|
+   |<---------------------------------------- SOL + note sh1ft:1:pay:n --|
+</pre>
+  <p>the roster is rebuilt from chain history: for each of the top holders' token accounts, the first transaction after the shift started gives the balance at clock-in (its pre-balance; no transaction means the balance never moved), and any transaction inside the shift that lowers the balance means fired.</p>
+
+  <h2 id="api">08 · PUBLIC API</h2>
+  <table>
+    <tr><td>GET /api/shift?action=config</td><td>the clock, the payroll wallet, the rules</td></tr>
+    <tr><td>GET /api/shift?action=state</td><td>this shift: desks, boxes, payroll balance, last payroll</td></tr>
+    <tr><td>GET /api/shift?action=desks&amp;n=&lt;shift&gt;</td><td>the roster of a shift (last 8): workers, fired</td></tr>
+    <tr><td>GET /api/shift?action=me&amp;w=&lt;wallet&gt;</td><td>on, fired, late or off, with desk and wage</td></tr>
+    <tr><td>GET /api/shift?action=ledger</td><td>fees in and payrolls out</td></tr>
+    <tr><td>POST /api/shift?action=pay</td><td>run payroll for the last closed shift</td></tr>
+  </table>
+
+  <h2 id="limits">09 · HONEST LIMITS</h2>
+  <ul>
+    <li>payroll is only the creator fees. a quiet shift pays little; a dead one pays nothing.</li>
+    <li>the payroll key lives on a server. the code is public, the wallet is public, every payout is on chain, but you're trusting that server to run.</li>
+    <li>the $50 minimum uses the price when the roster is read, so it moves with the coin.</li>
+    <li>very active wallets (more than 25 moves in a shift) aren't checked and don't get a desk that shift.</li>
+    <li>a wallet that sold everything before payroll ran isn't on the roster anymore.</li>
+    <li>most memecoins go to zero. nothing here is advice.</li>
+  </ul>
+  <footer class="foot" style="margin-top:60px;padding-bottom:20px"><div class="wrap" style="padding:0"><span>not affiliated with pump.fun. not financial advice.</span><span class="sp"><a href="/">office</a><a href="/home">story</a></span></div></footer>
+</main>
+<script src="/assets/js/core.js"></script>
+</body>
+</html>

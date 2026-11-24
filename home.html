@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>sh1ft · the story</title>
+<meta name="description" content="hold $SH1FT through a whole 8-hour shift and the coin's creator fees pay you in SOL, split by bag. sell during it and you're fired.">
+<meta property="og:title" content="sh1ft · clock in. hold the shift. get paid.">
+<meta property="og:image" content="https://sh1ftsol.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#050506">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/sh1ft.css">
+<link rel="stylesheet" href="/assets/css/home.css">
+</head>
+<body class="home">
+<canvas id="world" aria-hidden="true"></canvas>
+<canvas class="grain" id="grain" aria-hidden="true"></canvas>
+<header class="bar">
+  <a class="wm" href="/" aria-label="sh1ft">sh<b>1</b>ft</a>
+  <nav class="rooms hn" aria-label="sections"><a href="#problem">the problem</a><a href="#levels">how</a><a href="#wage">your wage</a><a href="#rules">rules</a><a href="#check">check it</a><a href="#faq">faq</a></nav>
+  <div class="chip" id="clock"><i class="dot"></i>—</div>
+  <a class="pa warm" href="/">enter the office</a>
+</header>
+<div class="tag red" id="tag" style="opacity:0"><b>fired</b><span>sold mid-shift · desk cleared</span></div>
+<div class="sign" id="sign"><div class="l" id="signl">payroll in</div><div class="d" id="signd">--:--:--</div></div>
+<main class="page">
+  <section class="hero"><div class="wrap">
+    <div class="eyb"><b>●</b> an office that never closes</div>
+    <h1 class="wm big">sh<b>1</b>ft</h1>
+    <p class="lede">hold <b>$SH1FT</b> through a whole <b>8-hour shift</b> and the coin's creator fees pay you in <b>SOL</b>, split by bag. sell during the shift and you're <b>fired</b>.</p>
+    <div class="acts"><a class="pa warm" href="/">enter the office</a><a class="pa" href="#levels">how it works</a></div>
+    <div class="strip">
+      <div><div class="k">shift</div><div class="v" id="h-shift">—</div></div>
+      <div><div class="k">on shift</div><div class="v" id="h-on">—</div></div>
+      <div><div class="k">payroll</div><div class="v warm" id="h-pay">—</div></div>
+      <div><div class="k">paid so far</div><div class="v" id="h-paid">—</div></div>
+    </div>
+  </div></section>
+
+  <section id="problem" class="sec"><div class="wrap">
+    <div class="eyb"><b>00</b> the problem</div>
+    <h2 class="hd">holding pays <span>nothing</span>.</h2>
+    <p class="lede">on a normal coin the only way to get paid is to sell. every creator fee goes to one wallet, and the people who held the longest get the least.</p>
+    <div class="cmp"><table class="tbl"><thead><tr><th></th><th>a usual coin</th><th class="warm">$SH1FT</th></tr></thead><tbody>
+      <tr><td>paid while you hold</td><td>no</td><td class="warm">every 8 hours, in SOL</td></tr>
+      <tr><td>where the creator fees go</td><td>the dev</td><td class="warm">payroll, then the holders</td></tr>
+      <tr><td>what selling costs you</td><td>nothing</td><td class="warm">that shift's wage</td></tr>
+      <tr><td>anything to stake or claim</td><td>usually</td><td class="warm">nothing. SOL just arrives</td></tr>
+      <tr><td>can you check it</td><td>—</td><td class="warm">one public wallet, every payout on chain</td></tr>
+    </tbody></table></div>
+  </div></section>
+
+  <div id="levels">
+  <section class="lvl" data-s="1"><div class="wrap"><div class="card">
+    <div class="eyb"><b>01</b> clock in</div>
+    <h2 class="hd">hold when the shift starts.</h2>
+    <p>shifts start at <b>00:00</b>, <b>08:00</b> and <b>16:00</b> utc. if you hold at least <b>$50</b> of $SH1FT at that moment, you're on shift. the top <b>100</b> get a desk.</p>
+    <div class="flow"><span>00:00 graveyard</span><i></i><span>08:00 day</span><i></i><span>16:00 swing</span></div>
+  </div></div></section>
+  <section class="lvl r" data-s="2"><div class="wrap"><div class="card">
+    <div class="eyb"><b>02</b> the shift</div>
+    <h2 class="hd">eight hours. just hold.</h2>
+    <p>nothing to sign, stake or click. buying more is fine. your wage is set by the bag you <b>clocked in</b> with, read straight from the chain.</p>
+    <div class="mini"><div><div class="k">a shift</div><div class="v">8h</div></div><div><div class="k">per day</div><div class="v">3</div></div><div><div class="k">desks</div><div class="v">100</div></div></div>
+  </div></div></section>
+  <section class="lvl" data-s="3"><div class="wrap"><div class="card">
+    <div class="eyb red"><b>03</b> sell, and you're fired</div>
+    <h2 class="hd">sell during the shift and your desk gets <span class="red">boxed</span>.</h2>
+    <p>sell or send any $SH1FT before the shift ends and you lose <b>that shift's wage</b>. your share goes to everyone who stayed. you can clock back in at the next one.</p>
+  </div></div></section>
+  <section class="lvl r" data-s="4"><div class="wrap"><div class="card">
+    <div class="eyb"><b>04</b> payroll</div>
+    <h2 class="hd">the shift ends. <span>payroll</span> runs.</h2>
+    <p>every creator fee lands in one public <b>payroll wallet</b>. when a shift ends it pays everyone who worked it, <b>split by bag</b>, minus 0.002 SOL kept for rent. anyone can press run payroll, and it runs by itself once a day.</p>
+    <div class="flow"><span>fees</span><i></i><span>payroll wallet</span><i></i><span>everyone on shift</span></div>
+  </div></div></section>
+  </div>
+
+  <section id="wage" class="sec"><div class="wrap">
+    <div class="eyb"><b>05</b> your wage</div>
+    <h2 class="hd">what a shift pays you.</h2>
+    <p class="lede">the real formula: payroll × your bag ÷ everyone's bag on shift. move the numbers.</p>
+    <div class="calc">
+      <div class="in">
+        <label>payroll this shift <b id="c-pv">—</b><input type="range" id="c-p" min="0" max="1000" value="450"></label>
+        <label>your bag <b id="c-bv">—</b><input type="range" id="c-b" min="0" max="1000" value="400"></label>
+        <label>everyone on shift holds <b id="c-tv">—</b><input type="range" id="c-t" min="0" max="1000" value="600"></label>
+      </div>
+      <div class="out">
+        <div class="k">your wage, this shift</div><div class="big" id="c-out">—</div>
+        <div class="mini"><div><div class="k">per day</div><div class="v" id="c-day">—</div></div><div><div class="k">per week</div><div class="v" id="c-week">—</div></div><div><div class="k">your share</div><div class="v" id="c-share">—</div></div></div>
+        <div class="note" id="c-note">if every shift paid the same. they won't: payroll is whatever the fees were.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="rules" class="sec"><div class="wrap">
+    <div class="eyb"><b>06</b> the rules</div>
+    <h2 class="hd">numbers, not promises.</h2>
+    <div class="nums"><div><b>8h</b><span>a shift</span></div><div><b>100</b><span>desks</span></div><div><b>$50</b><span>to clock in</span></div><div><b>0</b><span>sh1ft's cut</span></div></div>
+    <div class="pills"><span>pools, programs, the payroll wallet <b>never get a desk</b></span><span>smallest wage <b>0.001 SOL</b></span><span>you must still hold <b>when payroll runs</b></span><span>no payroll under <b>0.01 SOL</b>, it rolls on</span></div>
+  </div></section>
+
+  <section id="check" class="sec"><div class="wrap">
+    <div class="eyb"><b>07</b> check everything</div>
+    <h2 class="hd">every part has an address.</h2>
+    <div class="addr">
+      <div><div class="k">$SH1FT</div><div class="v" id="a-ca">—</div></div>
+      <div><div class="k">payroll wallet</div><div class="v" id="a-pay">—</div></div>
+      <div><div class="k">payroll note</div><div class="v">sh1ft:1:pay:&lt;shift&gt;</div></div>
+      <div><div class="k">the clock</div><div class="v">floor(unix ms ÷ 28,800,000)</div></div>
+    </div>
+    <p class="lede" style="font-size:14px">the roster is rebuilt from each holder's token history on Solana, so anyone can recompute who worked a shift. the <a href="/docs" class="warm">manual</a> shows how.</p>
+  </div></section>
+
+  <section id="faq" class="sec"><div class="wrap faqg">
+    <div><div class="eyb"><b>08</b> questions</div><h2 class="hd">questions.</h2></div>
+    <div class="faq">
+      <details><summary>do i need to sign anything?</summary><p>no. sh1ft never asks your wallet to sign. you hold, and SOL arrives. connecting a wallet on the site only reads its address.</p></details>
+      <details><summary>where does payroll come from?</summary><p>$SH1FT's creator fees. pump.fun's fee sharing sends them to the payroll wallet, and that wallet only pays wages.</p></details>
+      <details><summary>who holds the payroll key?</summary><p>sh1ft's server, derived from one secret. the code sends payroll in one way only: to the wallets on the last shift's roster, split by bag.</p></details>
+      <details><summary>what if nobody runs payroll?</summary><p>it runs by itself once a day, and anyone can press it any time. a shift's fees roll into the next payroll if it's missed.</p></details>
+      <details><summary>does buying more count?</summary><p>yes, from the next shift. inside a shift your wage uses the bag you clocked in with. buying never fires you; selling or sending does.</p></details>
+    </div>
+  </div></section>
+
+  <section class="outro"><div class="wrap">
+    <h2 class="hd">clock in.<br><span>or clock out.</span></h2>
+    <div class="acts" style="justify-content:center"><a class="pa warm" href="/">enter the office</a><a class="pa" href="/docs">read the manual</a></div>
+  </div></section>
+  <footer class="foot"><div class="wrap"><span class="wm" style="font-size:18px">sh<b>1</b>ft</span><span>not affiliated with pump.fun. not financial advice.</span><span class="sp"><a href="/">office</a><a href="/docs">docs</a><a href="#top" onclick="scrollTo(0,0);return false">top ↑</a></span></div></footer>
+</main>
+<script src="/assets/js/core.js"></script>
+<script src="/assets/js/office.js"></script>
+<script src="/assets/js/home.js"></script>
+</body>
+</html>

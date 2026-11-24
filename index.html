@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>sh1ft · clock in. hold the shift. get paid.</title>
+<meta name="description" content="an office that never closes. hold $SH1FT through a whole 8-hour shift and the coin's creator fees pay you, split by bag. sell during it and you're fired.">
+<meta property="og:title" content="sh1ft · clock in. hold the shift. get paid.">
+<meta property="og:description" content="hold through a whole 8-hour shift and payroll pays you in SOL. sell during it and you're fired.">
+<meta property="og:image" content="https://sh1ftsol.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#050506">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/mo4.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/assets/fonts/ms8.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/assets/css/sh1ft.css">
+</head>
+<body class="intro-on">
+<canvas id="world" aria-label="the office: every lit desk is a holder on shift, every box is someone who sold"></canvas>
+<canvas class="grain" id="grain" aria-hidden="true"></canvas>
+<header class="bar">
+  <a class="wm" href="/" aria-label="sh1ft">sh<b>1</b>ft</a>
+  <nav class="rooms" aria-label="rooms"><i class="pill"></i>
+    <a href="#/office" data-room="office"><i>1</i><span>office</span></a><a href="#/payroll" data-room="payroll"><i>2</i><span>payroll</span></a><a href="#/desks" data-room="desks"><i>3</i><span>desks</span></a><a href="#/me" data-room="me"><i>4</i><span>me</span></a><a href="#/ledger" data-room="ledger"><i>5</i><span>ledger</span></a><a href="#/rules" data-room="rules"><i>6</i><span>rules</span></a><a href="#/terminal" data-room="terminal"><i>7</i><span>terminal</span></a>
+  </nav>
+  <div class="chip" id="clock"><i class="dot"></i>—</div>
+  <a class="pa" href="/home">story</a>
+  <button class="ib" data-sound aria-label="sound">♪</button>
+  <button class="ib" id="slash" aria-label="terminal">/</button>
+</header>
+<div class="sign" id="sign"><div class="l" id="signl">payroll in</div><div class="d" id="signd">--:--:--</div></div>
+<div class="tag" id="tag" style="opacity:0"></div>
+<aside class="panel" id="panel" aria-live="polite"></aside>
+<nav class="mnav" aria-label="rooms"><a href="#/office" data-room="office">office</a><a href="#/payroll" data-room="payroll">payroll</a><a href="#/desks" data-room="desks">desks</a><a href="#/me" data-room="me">me</a><a href="#/ledger" data-room="ledger">ledger</a><a href="#/rules" data-room="rules">rules</a><a href="#/terminal" data-room="terminal">terminal</a><a href="/home">story</a></nav>
+<footer class="status">
+  <span><i class="dot off" id="s-live" style="display:inline-block;margin-right:7px"></i><span id="s-livet">—</span></span>
+  <span>SOL <b id="s-sol">—</b></span>
+  <span class="opt">$SH1FT <b id="s-coin">—</b></span>
+  <span>on shift <b id="s-on">—</b></span>
+  <span class="opt">fired <b id="s-fired">—</b></span>
+  <span>payroll <b id="s-pay">—</b></span>
+  <span class="opt"><b id="utc">—</b> utc</span>
+  <span class="hint"><kbd>1</kbd>–<kbd>7</kbd> rooms · <kbd>/</kbd> terminal · click a desk · <kbd>esc</kbd> out</span>
+</footer>
+<div class="intro" aria-hidden="true">
+  <div class="black"></div>
+  <div class="type"></div>
+  <div class="title"><div class="wm">sh<b>1</b>ft</div><p>clock in. hold the shift. get paid in SOL.</p><button class="pa warm go">clock in</button></div>
+  <span class="tap">tap for sound</span>
+  <button class="skip">skip ›</button>
+</div>
+<script src="/assets/js/core.js"></script>
+<script src="/assets/js/office.js"></script>
+<script src="/assets/js/world.js"></script>
+</body>
+</html>
